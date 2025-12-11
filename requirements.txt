@@ -1,0 +1,18 @@
+# Full development environment: serving runtime + training/MLOps/dev tooling.
+# The Docker image installs requirements-api.txt only.
+-r requirements-api.txt
+
+# --- tuning / tracking ---
+optuna==4.1.0
+mlflow==2.18.0
+dvc==3.58.0
+pathspec==0.11.2  # dvc 3.58.0 breaks on pathspec>=0.12 (_DIR_MARK import error)
+
+# --- eda / plots ---
+matplotlib==3.9.3
+seaborn==0.13.2
+
+# --- dev ---
+pytest==8.3.4
+httpx==0.28.1
+ruff==0.8.4

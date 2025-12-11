@@ -1,0 +1,34 @@
+stages:
+  prepare:
+    cmd: python -m src.data
+    deps:
+      - src/data.py
+      - src/config.py
+      - data/raw/cs-training.csv
+    outs:
+      - data/processed/train.parquet
+      - data/processed/test.parquet
+
+  build_model:
+    cmd: python -m src.build_model --no-register
+    deps:
+      - src/build_model.py
+      - src/features.py
+      - src/models.py
+      - data/processed/train.parquet
+    outs:
+      - models/model.joblib
+      - models/model_meta.json
+
+  evaluate:
+    cmd: python -m src.evaluate
+    deps:
+      - src/evaluate.py
+      - models/model.joblib
+      - data/processed/test.parquet
+    outs:
+      - reports/figures/evaluation_curves.png
+      - reports/figures/confusion_matrix.png
+    metrics:
+      - reports/test_metrics.json:
+          cache: false

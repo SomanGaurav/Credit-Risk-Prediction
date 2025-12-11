@@ -1,0 +1,82 @@
+schema: '2.0'
+stages:
+  prepare:
+    cmd: python -m src.data
+    deps:
+    - path: data/raw/cs-training.csv
+      hash: md5
+      md5: cce525a1d41f234f58d3bb52f3d2516b
+      size: 7564965
+    - path: src/config.py
+      hash: md5
+      md5: 8c34d139560d603b640769d5076d184f
+      size: 1802
+    - path: src/data.py
+      hash: md5
+      md5: 2bb6a89802792b6ed0a3d04b425cc28c
+      size: 3136
+    outs:
+    - path: data/processed/test.parquet
+      hash: md5
+      md5: 156793a99a5ac84be165f119829cfa1c
+      size: 707460
+    - path: data/processed/train.parquet
+      hash: md5
+      md5: c5812284fd9b3b5dd3621a4f373adaf9
+      size: 2726485
+  build_model:
+    cmd: python -m src.build_model --no-register
+    deps:
+    - path: data/processed/train.parquet
+      hash: md5
+      md5: c5812284fd9b3b5dd3621a4f373adaf9
+      size: 2726485
+    - path: src/build_model.py
+      hash: md5
+      md5: 37b0ac607c57da99ff03033332176b25
+      size: 5427
+    - path: src/features.py
+      hash: md5
+      md5: e0305d3601ba995a461efe0bfe5a183a
+      size: 5148
+    - path: src/models.py
+      hash: md5
+      md5: cabac4255305f41b59b8be205768abc0
+      size: 2937
+    outs:
+    - path: models/model.joblib
+      hash: md5
+      md5: 856df8196995de459c2f83e3a636d790
+      size: 1388755
+    - path: models/model_meta.json
+      hash: md5
+      md5: 7038bdeac02df4392fffc6f2fff6275b
+      size: 2007
+  evaluate:
+    cmd: python -m src.evaluate
+    deps:
+    - path: data/processed/test.parquet
+      hash: md5
+      md5: 156793a99a5ac84be165f119829cfa1c
+      size: 707460
+    - path: models/model.joblib
+      hash: md5
+      md5: 856df8196995de459c2f83e3a636d790
+      size: 1388755
+    - path: src/evaluate.py
+      hash: md5
+      md5: 2ffd81a7e284063ba8c9faf1e3aa461e
+      size: 4791
+    outs:
+    - path: reports/figures/confusion_matrix.png
+      hash: md5
+      md5: 1dd734fc6dc49000cf8d1610cbb943a0
+      size: 24674
+    - path: reports/figures/evaluation_curves.png
+      hash: md5
+      md5: 1bee444c96c3639129d56bcba5d521ec
+      size: 72454
+    - path: reports/test_metrics.json
+      hash: md5
+      md5: f686c678243e073e9fb8b6c9cdb279fb
+      size: 337

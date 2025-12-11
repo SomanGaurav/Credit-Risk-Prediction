@@ -1,0 +1,20 @@
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+
+# Data is tracked by DVC, not git
+data/raw/*.csv
+data/processed/*
+
+# The baseline model ships in git (1.4MB) so the Docker image and CI are
+# buildable from a fresh clone without a DVC remote or a training run.
+# Re-run `python -m src.build_model` and commit the result to update it.
+mlruns/
+mlartifacts/
+reports/figures/*.png
+optuna.db
+
+.env

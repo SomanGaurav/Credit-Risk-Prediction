@@ -1,0 +1,19 @@
+# Runtime dependencies for the FastAPI service (used by the Docker image).
+# Kept separate from requirements.txt so the serving image stays slim:
+# no mlflow, optuna, dvc, matplotlib or test tooling.
+pandas==2.2.3
+numpy==2.1.3
+scikit-learn==1.5.2
+imbalanced-learn==0.12.4
+joblib==1.4.2
+
+# Booster runtimes: the serialized pipeline needs whichever library won.
+# Trim this list once the champion model is locked in.
+xgboost==2.1.3
+lightgbm==4.5.0
+catboost==1.2.10
+
+fastapi==0.115.6
+uvicorn[standard]==0.34.0
+pydantic==2.10.4
+pydantic-settings==2.7.0

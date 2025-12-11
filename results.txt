@@ -1,0 +1,25 @@
+Cross-validating 8 models on (120000, 13) (imbalance strategy: class_weight)
+
+  logistic_regression    ... pr_auc 0.3824  roc_auc 0.8575  (1s/fold)
+  decision_tree          ... pr_auc 0.3702  roc_auc 0.8441  (1s/fold)
+  random_forest          ... pr_auc 0.3975  roc_auc 0.8624  (7s/fold)
+  svm_linear             ... pr_auc 0.3758  roc_auc 0.8559  (1s/fold)
+  xgboost                ... pr_auc 0.3965  roc_auc 0.8610  (1s/fold)
+  lightgbm               ... pr_auc 0.3965  roc_auc 0.8604  (1s/fold)
+  catboost               ... pr_auc 0.4020  roc_auc 0.8642  (4s/fold)
+  mlp                    ... pr_auc 0.3919  roc_auc 0.8612  (6s/fold)
+
+--- ranked by pr_auc ---
+              model  pr_auc  roc_auc     f1  precision  recall  accuracy
+           catboost  0.4020   0.8642 0.3448     0.2225  0.7656    0.8055
+      random_forest  0.3975   0.8624 0.3793     0.2608  0.6955    0.8478
+            xgboost  0.3965   0.8610 0.3491     0.2282  0.7417    0.8151
+           lightgbm  0.3965   0.8604 0.3534     0.2326  0.7351    0.8202
+                mlp  0.3919   0.8612 0.2779     0.5919  0.1828    0.9369
+logistic_regression  0.3824   0.8575 0.3361     0.2166  0.7492    0.8022
+         svm_linear  0.3758   0.8559 0.2265     0.6194  0.1386    0.9367
+      decision_tree  0.3702   0.8441 0.3188     0.2017  0.7615    0.7824
+
+wrote reports/model_comparison_class_weight.json
+best: catboost (pr_auc=0.4020)
+
