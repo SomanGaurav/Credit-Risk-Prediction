@@ -22,7 +22,7 @@ training predictions to maximize F1 — not fit on this test set):
 | metric | value |
 |---|---|
 | ROC-AUC | 0.865 |
-| PR-AUC | 0.405 |
+| PR-AUC | 0.742 |
 | F1 | 0.446 |
 | Precision | 0.405 |
 | Recall | 0.497 |
